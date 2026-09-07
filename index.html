@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#050e1a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Hack & Sheet: The daily 5-letter curling word puzzle.">
+  <title>Hack &amp; Sheet — Daily Word Puzzle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="rink-ambient" aria-hidden="true">
+    <div class="house-target">
+      <div class="ring ring-12ft"></div>
+      <div class="ring ring-8ft"></div>
+      <div class="ring ring-4ft"></div>
+      <div class="ring button"></div>
+      <div class="line tee-line"></div>
+      <div class="line center-line"></div>
+      <div class="line hog-line top-hog"></div>
+      <div class="line hog-line bottom-hog"></div>
+    </div>
+  </div>
+
+  <div id="app" class="app-viewport">
+    
+    <section id="screen-menu" class="screen active" aria-label="Main Menu">
+      <header class="menu-header">
+        <div class="brand-badge">
+          <svg class="icon-stone-badge" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <ellipse cx="12" cy="15" rx="9" ry="5.5" />
+            <path d="M7 13V9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4" />
+            <path d="M10 7V5h4v2" />
+          </svg>
+          <span>DAILY WORD PUZZLE</span>
+        </div>
+        <h1 class="game-title">HACK &amp;<br><span class="accent-text">SHEET</span></h1>
+        <p class="game-tagline">THE CURLING WORD GAME</p>
+      </header>
+
+      <nav class="menu-nav" aria-label="Game Navigation">
+        <button id="btn-play-daily" class="menu-card primary-card" type="button">
+          <div class="card-icon-wrap">
+            <svg class="stone-svg" viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">
+              <ellipse cx="24" cy="30" rx="20" ry="12" fill="#0f172a" stroke="#000" stroke-width="3"/>
+              <ellipse cx="24" cy="27" rx="17" ry="8.5" fill="#e11d48"/>
+              <path d="M16 23V13c0-2.2 1.8-4 4-4h8c2.2 0 4 1.8 4 4v10" fill="none" stroke="#f8fafc" stroke-width="4.2" stroke-linecap="round"/>
+              <rect x="19" y="7" width="10" height="4.5" rx="2" fill="#38bdf8"/>
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title-row">
+              <span class="card-title">DAILY PUZZLE</span>
+              <span id="daily-status-badge" class="status-pill open">PLAY</span>
+            </div>
+            <span id="daily-puzzle-subtitle" class="card-subtitle">Play today's puzzle</span>
+          </div>
+          <span class="card-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button id="btn-open-vault" class="menu-card" type="button">
+          <div class="card-icon-wrap vault-icon-box">
+            <svg class="vault-svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <rect x="3" y="3" width="18" height="18" rx="3"/>
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="12" x2="15.5" y2="8.5"/>
+              <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title-row">
+              <span class="card-title">PAST PUZZLES</span>
+              <span id="vault-count-badge" class="count-pill">0 AVAILABLE</span>
+            </div>
+            <span class="card-subtitle">Play previously released puzzles</span>
+          </div>
+          <span class="card-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <div class="menu-utility-bar">
+          <button id="btn-open-stats" class="util-btn" title="View Statistics" aria-label="Statistics" type="button">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+            <span>STATS</span>
+          </button>
+          <button id="btn-open-help" class="util-btn" title="How to Play" aria-label="How to play" type="button">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <circle cx="12" cy="12" r="9.5"/>
+              <path d="M9.2 9a3 3 0 0 1 5.6 1c0 2-2.8 2.8-2.8 2.8"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            <span>HELP</span>
+          </button>
+          <button id="btn-open-settings" class="util-btn" title="Settings" aria-label="Settings" type="button">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            <span>SETTINGS</span>
+          </button>
+        </div>
+      </nav>
+
+      <footer class="menu-footer">
+        <span>GUESS THE 5-LETTER CURLING WORD</span>
+      </footer>
+    </section>
+
+    <section id="screen-game" class="screen" aria-label="Game Board Screen">
+      <header class="game-header">
+        <button id="btn-game-back" class="neo-btn sm" aria-label="Back" type="button">
+          <span class="btn-arrow" aria-hidden="true">&larr;</span>
+          <span id="btn-back-text">BACK</span>
+        </button>
+        
+        <div class="game-meta-group">
+          <span id="game-badge" class="mini-tag">DAILY PUZZLE</span>
+          <h2 id="game-date-display" class="game-date">2025-01-01</h2>
+        </div>
+
+        <div class="game-controls">
+          <button id="btn-toggle-sound" class="neo-btn sm icon-only" title="Toggle Sound" aria-label="Toggle Sound" type="button">
+            <span id="sound-icon">🔊</span>
+          </button>
+          <button id="btn-game-info" class="neo-btn sm icon-only" title="How to Play" aria-label="How to Play" type="button">
+            <span aria-hidden="true">?</span>
+          </button>
+        </div>
+      </header>
+
+      <div id="banner-finished-inspect" class="banner-inspect" hidden>
+        <div class="inspect-text-group">
+          <span class="inspect-dot" aria-hidden="true">&bull;</span>
+          <span>PUZZLE COMPLETED</span>
+        </div>
+        <button id="btn-reopen-endgame" class="neo-btn sm accent" type="button">RESULTS</button>
+      </div>
+
+      <div id="toast-container" class="toast-hub" aria-live="polite" aria-atomic="true"></div>
+
+      <main class="board-container" id="board-container">
+        <div id="game-board" class="game-grid" role="grid" aria-label="Word puzzle grid: 6 guesses of 5 letters"></div>
+      </main>
+
+      <nav id="keyboard" class="virtual-keyboard" aria-label="Virtual Keyboard"></nav>
+    </section>
+
+    <section id="screen-vault" class="screen" aria-label="Past Puzzles Screen">
+      <header class="vault-header">
+        <button id="btn-vault-back" class="neo-btn sm" type="button">
+          <span class="btn-arrow" aria-hidden="true">&larr;</span> MENU
+        </button>
+        <div class="vault-heading">
+          <h2>PAST PUZZLES</h2>
+          <span class="mini-tag">ARCHIVE</span>
+        </div>
+        <div class="header-spacer" style="width: 72px;" aria-hidden="true"></div>
+      </header>
+      
+      <p class="vault-subtext">Play previously released daily puzzles at your own pace.</p>
+
+      <div id="vault-list" class="vault-grid"></div>
+    </section>
+
+    <div id="modal-stats" class="modal-backdrop" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="title-stats">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-sub-badge">PLAYER LOG</span>
+            <h3 id="title-stats">STATISTICS</h3>
+          </div>
+          <button class="btn-close-modal" data-target="modal-stats" aria-label="Close statistics" type="button">&times;</button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-cell">
+            <span id="stat-played" class="stat-number">0</span>
+            <span class="stat-label">PLAYED</span>
+          </div>
+          <div class="stat-cell">
+            <span id="stat-win-pct" class="stat-number">0%</span>
+            <span class="stat-label">WIN %</span>
+          </div>
+          <div class="stat-cell">
+            <span id="stat-streak" class="stat-number">0</span>
+            <span class="stat-label">STREAK</span>
+          </div>
+          <div class="stat-cell">
+            <span id="stat-max-streak" class="stat-number">0</span>
+            <span class="stat-label">MAX STREAK</span>
+          </div>
+        </div>
+
+        <h4 class="modal-section-title">GUESS DISTRIBUTION</h4>
+        <div id="guess-distribution" class="chart-container"></div>
+
+        <button class="neo-btn full-width close-action" data-target="modal-stats" type="button">CLOSE</button>
+      </div>
+    </div>
+
+    <div id="modal-help" class="modal-backdrop" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="title-help">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-sub-badge">INSTRUCTIONS</span>
+            <h3 id="title-help">HOW TO PLAY</h3>
+          </div>
+          <button class="btn-close-modal" data-target="modal-help" aria-label="Close instructions" type="button">&times;</button>
+        </div>
+        <div class="help-body">
+          <p>Guess the 5-letter curling word in <strong>6 tries</strong>.</p>
+          <p class="help-note">Each guess must be a valid 5-letter word. Hit ENTER to submit.</p>
+          
+          <hr class="neo-divider">
+          
+          <div class="example-block">
+            <div class="demo-row">
+              <div class="cell correct">S</div>
+              <div class="cell">T</div>
+              <div class="cell">O</div>
+              <div class="cell">N</div>
+              <div class="cell">E</div>
+            </div>
+            <p><strong>GREEN</strong>: <strong>S</strong> is in the word and in the correct spot.</p>
+          </div>
+
+          <div class="example-block">
+            <div class="demo-row">
+              <div class="cell">B</div>
+              <div class="cell present">R</div>
+              <div class="cell">O</div>
+              <div class="cell">O</div>
+              <div class="cell">M</div>
+            </div>
+            <p><strong>YELLOW</strong>: <strong>R</strong> is in the word but in the wrong spot.</p>
+          </div>
+
+          <div class="example-block">
+            <div class="demo-row">
+              <div class="cell">S</div>
+              <div class="cell">H</div>
+              <div class="cell absent">E</div>
+              <div class="cell">E</div>
+              <div class="cell">T</div>
+            </div>
+            <p><strong>GRAY</strong>: <strong>E</strong> is not in the word in any spot.</p>
+          </div>
+        </div>
+        <button class="neo-btn full-width close-action" data-target="modal-help" type="button">GOT IT</button>
+      </div>
+    </div>
+
+    <div id="modal-settings" class="modal-backdrop" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="title-settings">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-sub-badge">PREFERENCES</span>
+            <h3 id="title-settings">SETTINGS</h3>
+          </div>
+          <button class="btn-close-modal" data-target="modal-settings" aria-label="Close settings" type="button">&times;</button>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-text">
+            <strong>Sound Effects</strong>
+            <p>Synthesized audio for clicks, tile reveals, and game results.</p>
+          </div>
+          <input type="checkbox" id="setting-sound" checked class="neo-toggle" aria-label="Toggle Sound Effects">
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-text">
+            <strong>High Contrast Mode</strong>
+            <p>High-contrast orange and blue tile indicators for enhanced visibility.</p>
+          </div>
+          <input type="checkbox" id="setting-contrast" class="neo-toggle" aria-label="Toggle High Contrast">
+        </div>
+
+        <div class="version-stamp">
+          <span>HACK &amp; SHEET — RELEASE VERSION</span>
+        </div>
+
+        <button class="neo-btn full-width close-action" data-target="modal-settings" type="button">DONE</button>
+      </div>
+    </div>
+
+    <div id="modal-endgame" class="modal-backdrop" hidden>
+      <div class="modal-card endgame-modal" role="dialog" aria-modal="true" aria-labelledby="endgame-title">
+        <div id="endgame-badge" class="brand-badge accent-badge">RESULT</div>
+        <h2 id="endgame-title" class="endgame-headline">PUZZLE SOLVED!</h2>
+        
+        <div class="solution-box">
+          <span class="solution-label">SOLUTION</span>
+          <div id="endgame-solution" class="solution-word">STONE</div>
+          <span id="endgame-clue" class="solution-clue"></span>
+        </div>
+
+        <div class="trivia-box">
+          <div class="trivia-tag">FACT</div>
+          <p id="endgame-trivia" class="trivia-content"></p>
+        </div>
+        
+        <div class="endgame-actions">
+          <button id="btn-share-result" class="neo-btn primary full-width" type="button">
+            <span>SHARE RESULT</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <circle cx="18" cy="5" r="3"/>
+              <circle cx="6" cy="12" r="3"/>
+              <circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </button>
+          
+          <div class="endgame-sub-actions">
+            <button id="btn-inspect-sheet" class="neo-btn flex-1" type="button">
+              VIEW BOARD
+            </button>
+            <button id="btn-endgame-to-menu" class="neo-btn flex-1" type="button">
+              MAIN MENU
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
