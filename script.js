@@ -5,131 +5,341 @@
     {
       id: "curling-puz-001",
       word: "STONE",
-      clue: "The 44-pound running granite rock.",
-      trivia: "Crafted exclusively from rare water-impermeable granite quarried on the Scottish island of Ailsa Craig."
     },
     {
       id: "curling-puz-002",
       word: "BROOM",
-      clue: "The brush used to sweep pebble and control curl.",
-      trivia: "Sweeping slightly warms and melts the pebble atop the ice sheet, reducing friction and straightening the run."
     },
     {
       id: "curling-puz-003",
       word: "SHEET",
-      clue: "The 150-foot lane of regulation leveled ice.",
-      trivia: "Curling ice is sprayed with water droplets that freeze into tiny raised beads called pebble."
     },
     {
       id: "curling-puz-004",
       word: "HOUSE",
-      clue: "The concentric 12-foot target rings.",
-      trivia: "Only stones inside or touching the outer 12-foot ring of the house can count toward points."
     },
     {
       id: "curling-puz-005",
       word: "GUARD",
-      clue: "A stone placed short to protect scoring rocks.",
-      trivia: "The Free Guard Zone rule protects early lead stones placed between the hog line and house from being removed."
     },
     {
       id: "curling-puz-006",
       word: "SWEEP",
-      clue: "Vigorous brushwork to carry stones further.",
-      trivia: "Front-end sweepers burn hundreds of calories per match by applying heavy downward body pressure on brush heads."
     },
     {
       id: "curling-puz-007",
       word: "SLIDE",
-      clue: "Delivery stance pushing out from the hack.",
-      trivia: "Curlers wear a Teflon or stainless-steel slider shoe on one foot and a high-traction gripper on the other."
     },
     {
       id: "curling-puz-008",
       word: "DRAWS",
-      clue: "Finesse deliveries stopping inside the house.",
-      trivia: "A precision draw shot requires exact weight, relying on the skip's broom placement to judge ice speed."
     },
     {
       id: "curling-puz-009",
       word: "HEAVY",
-      clue: "A delivery thrown with excessive velocity.",
-      trivia: "When a thrower delivers heavy weight, sweepers will back off immediately to allow natural friction to brake the rock."
     },
     {
       id: "curling-puz-010",
       word: "BITER",
-      clue: "A stone barely touching the outer 12-foot ring.",
-      trivia: "A stone is declared a biter if an overhead laser or plumb gauge verifies that any millimeter overhangs the house ring."
     },
     {
       id: "curling-puz-011",
       word: "BLANK",
-      clue: "A round concluded with zero points scored.",
-      trivia: "Skips intentionally blank an end in order to retain the coveted last-rock hammer advantage for the next round."
     },
     {
       id: "curling-puz-012",
       word: "STEAL",
-      clue: "Scoring points without holding the last rock.",
-      trivia: "Stealing an end swings tactical momentum, forcing the trailing team to take riskier shots around guards."
     },
     {
       id: "curling-puz-013",
       word: "HACKS",
-      clue: "Rubber-lined foothold brackets for delivery.",
-      trivia: "The hack provides the solid anchor from which curlers push forward in a balanced lunge down the sheet."
     },
     {
       id: "curling-puz-014",
       word: "CLEAN",
-      clue: "Gently brushing loose frost without heating ice.",
-      trivia: "Cleaning keeps the running path free from stray debris or lint that could cause a stone to pick and deviate."
     },
     {
       id: "curling-puz-015",
       word: "SPLIT",
-      clue: "A shot striking a rock to leave both in scoring play.",
-      trivia: "A well-executed split shot scores multiple points by spreading rocks across opposite wings of the rings."
     },
     {
       id: "curling-puz-016",
       word: "PEELS",
-      clue: "Hard shots removing guards while rolling out.",
-      trivia: "Peeling opens up the center lane, clearing opponents' defensive stones to expose the house."
     },
     {
       id: "curling-puz-017",
       word: "SKIPS",
-      clue: "Team captains directing strategy and calling line.",
-      trivia: "The skip stands in the house holding the broom target, reading the curl and calling sweeping commands."
     },
     {
       id: "curling-puz-018",
       word: "LEADS",
-      clue: "Players throwing the opening two rocks of each end.",
-      trivia: "Leads must excel at placing accurate corner guards and sweep for all three subsequent teammates."
     },
     {
       id: "curling-puz-019",
       word: "LINES",
-      clue: "The trajectory path of the moving stone.",
-      trivia: "Reading ice lines requires predicting how many inches or feet the stone will bend across differing pebble conditions."
     },
     {
       id: "curling-puz-020",
       word: "FORCE",
-      clue: "Making the team with hammer take only one single point.",
-      trivia: "A defensive success for the team without hammer is forcing their opponent to score just one point."
+    },
+    {
+      id: "curling-puz-021",
+      word: "ROCKS",
+    },
+    {
+      id: "curling-puz-022",
+      word: "RINGS",
+    },
+    {
+      id: "curling-puz-023",
+      word: "SCORE",
+    },
+    {
+      id: "curling-puz-024",
+      word: "POINT",
+    },
+    {
+      id: "curling-puz-025",
+      word: "RAISE",
+    },
+    {
+      id: "curling-puz-026",
+      word: "TIMER",
+    },
+    {
+      id: "curling-puz-027",
+      word: "CHUCK",
+    },
+    {
+      id: "curling-puz-028",
+      word: "CLOCK",
+    },
+    {
+      id: "curling-puz-029",
+      word: "COUNT",
+    },
+    {
+      id: "curling-puz-030",
+      word: "FRONT",
+    },
+    {
+      id: "curling-puz-031",
+      word: "INNER",
+    },
+    {
+      id: "curling-puz-032",
+      word: "LASER",
+    },
+    {
+      id: "curling-puz-033",
+      word: "MATCH",
+    },
+    {
+      id: "curling-puz-034",
+      word: "ORDER",
+    },
+    {
+      id: "curling-puz-035",
+      word: "PIVOT",
+    },
+    {
+      id: "curling-puz-036",
+      word: "POWER",
+    },
+    {
+      id: "curling-puz-037",
+      word: "SPEED",
+    },
+    {
+      id: "curling-puz-038",
+      word: "START",
+    },
+    {
+      id: "curling-puz-039",
+      word: "STRIP",
+    },
+    {
+      id: "curling-puz-040",
+      word: "TABLE",
+    },
+    {
+      id: "curling-puz-041",
+      word: "TAILS",
+    },
+    {
+      id: "curling-puz-042",
+      word: "TEAMS",
+    },
+    {
+      id: "curling-puz-043",
+      word: "TOUCH",
+    },
+    {
+      id: "curling-puz-044",
+      word: "TRACK",
+    },
+    {
+      id: "curling-puz-045",
+      word: "WATER",
+    },
+    {
+      id: "curling-puz-046",
+      word: "WRIST",
+    },
+    {
+      id: "curling-puz-047",
+      word: "CARVE",
+    },
+    {
+      id: "curling-puz-048",
+      word: "CLEAR",
+    },
+    {
+      id: "curling-puz-049",
+      word: "COVER",
+    },
+    {
+      id: "curling-puz-050",
+      word: "CRASH",
+    },
+    {
+      id: "curling-puz-051",
+      word: "CURVE",
+    },
+    {
+      id: "curling-puz-052",
+      word: "FROST",
+    },
+    {
+      id: "curling-puz-053",
+      word: "CHILL",
+    },
+    {
+      id: "curling-puz-054",
+      word: "STICK",
+    },
+    {
+      id: "curling-puz-055",
+      word: "ANGLE",
+    },
+    {
+      id: "curling-puz-056",
+      word: "BRUSH",
+    },
+    {
+      id: "curling-puz-057",
+      word: "SLATE",
+    },
+    {
+      id: "curling-puz-058",
+      word: "GRIPS",
+    },
+    {
+      id: "curling-puz-059",
+      word: "RINKS",
+    },
+    {
+      id: "curling-puz-060",
+      word: "ROLLS",
+    },
+    {
+      id: "curling-puz-061",
+      word: "WICKS",
+    },
+    {
+      id: "curling-puz-062",
+      word: "TAKES",
+    },
+    {
+      id: "curling-puz-063",
+      word: "SWING",
+    },
+    {
+      id: "curling-puz-064",
+      word: "BLOCK",
+    },
+    {
+      id: "curling-puz-065",
+      word: "BOARD",
+    },
+    {
+      id: "curling-puz-066",
+      word: "BRAKE",
+    },
+    {
+      id: "curling-puz-067",
+      word: "BREAK",
+    },
+    {
+      id: "curling-puz-068",
+      word: "CHAMP",
+    },
+    {
+      id: "curling-puz-069",
+      word: "CHART",
+    },
+    {
+      id: "curling-puz-070",
+      word: "CHECK",
+    },
+    {
+      id: "curling-puz-071",
+      word: "COACH",
+    },
+    {
+      id: "curling-puz-072",
+      word: "CRAFT",
+    },
+    {
+      id: "curling-puz-073",
+      word: "DRIFT",
+    },
+    {
+      id: "curling-puz-074",
+      word: "FLOAT",
+    },
+    {
+      id: "curling-puz-075",
+      word: "FLUID",
+    },
+    {
+      id: "curling-puz-076",
+      word: "FOCUS",
+    },
+    {
+      id: "curling-puz-077",
+      word: "FRAME",
+    },
+    {
+      id: "curling-puz-078",
+      word: "GRASP",
+    },
+    {
+      id: "curling-puz-079",
+      word: "GUIDE",
+    },
+    {
+      id: "curling-puz-080",
+      word: "LIGHT",
     }
   ];
 
-  const EPOCH_ANCHOR = new Date("2025-01-01T00:00:00Z");
+  const EPOCH_ANCHOR = new Date("2026-09-07T00:00:00");
 
   const RAW_DICTIONARY = [
     "STONE", "BROOM", "SHEET", "HOUSE", "GUARD", "SWEEP", "SLIDE", "DRAWS", 
     "HEAVY", "BITER", "BLANK", "STEAL", "HACKS", "CLEAN", "SPLIT", "PEELS", 
-    "SKIPS", "LEADS", "LINES", "SHOTS", "FORCE", "SCORE", "RINGS", "POINT", 
+    "SKIPS", "LEADS", "LINES", "SHOTS", "FORCE", "SCORE", "RINGS", "POINT",
+    "CURLS", "CURLY", "TURNS", "THROW", "GLIDE", "SHOES", "AILSA", "CRAIG", "CHIPS", "CAROM",
+    "PORTS", "PATHS", "WEIGH", "DRAWN", "BENDS", "GAUGE", "SKATE", "FALLS", "FLAGS", "CREWS",
+    "ENDER", "HURLS", "SLIPS", "SWAYS", "SWIRL", "TWIST", "TWIRL", "DRAGS", "FLICK", "GRIND",
+    "HEAVE", "KNOBS", "LOCKS", "LOWER", "PEAKS", "PLAYS", "PLUMB", "RALLY", "REELS", "ROTOR",
+    "SCOOP", "SEAMS", "SHAVE", "SLICK", "SLOPE", "SPINS", "STATS", "STIRS", "TIMED", "TIMES",
+    "TRAIL", "TRICK", "VICES", "WEARS", "WIDTH", "WINDS", "WRAPS", "ZONES", "BURLS", "CHUTE",
+    "CLAMP", "CLIPS", "CRIMP", "DRAPE", "FLANK", "GRATE", "HAWSE", "KICKS", "LIFTS", "LOOPS",
+    "MARKS", "MOIST", "NOTCH", "PACER", "POISE", "PRONG", "RINSE", "ROARS", "SHOVE", "SKIDS",
+    "SLANT", "SNAPS", "SPECS", "STAYS", "STEPS", "TACKS", "TEASE", "THAWS", "TICKS", "TOILS",
+    "TRAYS", "TRIMS", "VIGOR", "WANDS", "WHIRL", "WIRES", "WORKS", "YARDS", "HANDS", "PICKS",
     "BONES", "FROST", "CHILL", "STICK", "RAISE", "TIMER", "CHUCK", "CLOCK", 
     "COUNT", "FRONT", "INNER", "LASER", "MATCH", "ORDER", "PIVOT", "POLAR", 
     "POWER", "ROBOT", "ROCKS", "SCALE", "SHAKE", "SHARE", "SPEED", "START", 
@@ -207,6 +417,23 @@
   const VALID_GUESS_SET = new Set(RAW_DICTIONARY);
   CURLING_PUZZLE_QUEUE.forEach(p => VALID_GUESS_SET.add(p.word));
 
+  const validatePuzzleQueue = () => {
+    const ids = new Set();
+    const words = new Set();
+    CURLING_PUZZLE_QUEUE.forEach((puzzle, index) => {
+      if (!puzzle || !/^curling-puz-\d+$/.test(puzzle.id) || ids.has(puzzle.id)) {
+        throw new Error(`Invalid or duplicate puzzle id at queue position ${index + 1}`);
+      }
+      if (!/^[A-Z]{5}$/.test(puzzle.word) || words.has(puzzle.word)) {
+        throw new Error(`Invalid or duplicate five-letter answer at queue position ${index + 1}`);
+      }
+      ids.add(puzzle.id);
+      words.add(puzzle.word);
+    });
+  };
+
+  validatePuzzleQueue();
+
   function formatDateISO(dateObj) {
     const y = dateObj.getFullYear();
     const m = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -214,22 +441,50 @@
     return `${y}-${m}-${d}`;
   }
 
+  function parseDateISO(dateStr) {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  }
+
   function getTodayString() {
     return formatDateISO(new Date());
   }
 
   function getAllComputedPuzzles() {
-    return CURLING_PUZZLE_QUEUE.map((item, index) => {
-      const assigned = new Date(EPOCH_ANCHOR);
-      assigned.setDate(assigned.getDate() + index);
-      const dateStr = item.date || formatDateISO(assigned);
+    const todayStr = getTodayString();
+    const today = parseDateISO(todayStr);
+    const epoch = parseDateISO(formatDateISO(EPOCH_ANCHOR));
+    const dayDiff = Math.max(0, Math.floor((today - epoch) / (1000 * 60 * 60 * 24)));
+    const schedule = loadSchedule();
+    const result = [];
 
-      return {
-        ...item,
-        assignedDate: dateStr,
-        orderIndex: index + 1
-      };
-    });
+    for (let index = 0; index <= dayDiff; index++) {
+      const assignedDate = formatDateISO(new Date(epoch.getTime() + index * 86400000));
+      let queueIndex = Number.isInteger(schedule.assignments[assignedDate])
+        ? schedule.assignments[assignedDate]
+        : null;
+
+      if (queueIndex === null || !CURLING_PUZZLE_QUEUE[queueIndex]) {
+        queueIndex = index === 0
+          ? 0
+          : (Number.isInteger(schedule.lastQueueIndex) ? schedule.lastQueueIndex + 1 : index) % CURLING_PUZZLE_QUEUE.length;
+        schedule.assignments[assignedDate] = queueIndex;
+        schedule.lastQueueIndex = queueIndex;
+        schedule.lastAssignedDate = assignedDate;
+      }
+
+      result.push({
+        ...CURLING_PUZZLE_QUEUE[queueIndex],
+        assignedDate,
+        releaseNumber: index + 1,
+        queueIndex,
+        isToday: assignedDate === todayStr,
+        isPast: assignedDate < todayStr
+      });
+    }
+
+    saveSchedule(schedule);
+    return result;
   }
 
   class WebAudioSynth {
@@ -417,6 +672,18 @@
     } catch (e) {
       return;
     }
+  }
+
+  function loadSchedule() {
+    return readStorage('schedule_v2', {
+      assignments: {},
+      lastAssignedDate: null,
+      lastQueueIndex: -1
+    });
+  }
+
+  function saveSchedule(schedule) {
+    writeStorage('schedule_v2', schedule);
   }
 
   let statsState = readStorage('stats', {
@@ -745,8 +1012,8 @@
     isRowTransitioning = false;
 
     document.getElementById('btn-back-text').textContent = (navigationOrigin === 'vault') ? "ARCHIVE" : "MENU";
-    document.getElementById('game-badge').textContent = isDailyMode ? "DAILY PUZZLE" : `ARCHIVE #${puzzle.orderIndex}`;
-    document.getElementById('game-date-display').textContent = puzzle.assignedDate;
+    document.getElementById('game-badge').textContent = isDailyMode ? "DAILY PUZZLE" : `ARCHIVE #${puzzle.releaseNumber}`;
+    document.getElementById('game-date-display').textContent = `DAY ${puzzle.releaseNumber} • ${puzzle.assignedDate}`;
     bannerInspect.setAttribute('hidden', '');
 
     initializeBoardUI();
@@ -788,13 +1055,7 @@
     let todayPuzzle = computedList.find(p => p.assignedDate === todayStr);
     
     if (!todayPuzzle && computedList.length > 0) {
-      const todayDate = new Date();
-      const diffDays = Math.floor((todayDate - EPOCH_ANCHOR) / (1000 * 60 * 60 * 24));
-      const fallbackIdx = ((diffDays % computedList.length) + computedList.length) % computedList.length;
-      todayPuzzle = {
-        ...computedList[fallbackIdx],
-        assignedDate: todayStr
-      };
+      todayPuzzle = computedList[computedList.length - 1];
     }
 
     const dailySubtitleEl = document.getElementById('daily-puzzle-subtitle');
@@ -863,7 +1124,7 @@
             <span class="mini-tag">${puzzle.assignedDate}</span>
             <span class="status-indicator ${statusClass}">&bull; ${statusText}</span>
           </div>
-          <span class="vault-title">#${puzzle.orderIndex}: ${puzzle.clue}</span>
+          <span class="vault-title">PUZZLE ${puzzle.releaseNumber}</span>
         </div>
         <button class="neo-btn sm" type="button">PLAY</button>
       `;
@@ -939,8 +1200,6 @@
     const badge = document.getElementById('endgame-badge');
     const title = document.getElementById('endgame-title');
     const solution = document.getElementById('endgame-solution');
-    const clue = document.getElementById('endgame-clue');
-    const trivia = document.getElementById('endgame-trivia');
 
     if (won) {
       badge.textContent = "VICTORY";
@@ -953,9 +1212,6 @@
     }
 
     solution.textContent = currentPuzzle.word;
-    clue.textContent = currentPuzzle.clue;
-    trivia.textContent = currentPuzzle.trivia;
-
     showModal('modal-endgame');
   }
 
@@ -1087,7 +1343,7 @@
       let todayPuz = computed.find(p => p.assignedDate === todayStr);
 
       if (!todayPuz && computed.length > 0) {
-        todayPuz = { ...computed[0], assignedDate: todayStr };
+        todayPuz = computed[computed.length - 1];
       }
 
       if (todayPuz) {

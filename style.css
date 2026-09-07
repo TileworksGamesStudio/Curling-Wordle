@@ -80,6 +80,7 @@ html, body {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+  text-shadow: 0.35px 0 #000000, -0.35px 0 #000000, 0 0.35px #000000, 0 -0.35px #000000;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -429,6 +430,35 @@ html, body {
   letter-spacing: 1.8px;
   color: var(--ice-cyan);
   opacity: 0.9;
+}
+
+.menu-home-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 9px 12px;
+  color: var(--ice-accent);
+  background: rgba(15, 39, 68, 0.9);
+  border: 2px solid #000;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.menu-home-link:hover {
+  background: var(--bg-card-hover);
+}
+
+.menu-home-link:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #000;
 }
 
 .neo-btn {
@@ -1132,36 +1162,6 @@ html, body {
   color: var(--ice-accent);
   margin: 0.25rem 0;
   text-shadow: 2px 2px 0px #000;
-}
-
-.solution-clue {
-  font-size: 0.82rem;
-  color: var(--text-main);
-  font-style: italic;
-}
-
-.trivia-box {
-  background: rgba(255, 255, 255, 0.04);
-  border-left: 4px solid var(--ice-cyan);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  padding: 0.75rem 0.9rem;
-  text-align: left;
-  margin-bottom: 1.2rem;
-  width: 100%;
-}
-
-.trivia-tag {
-  font-family: var(--font-display);
-  font-size: 0.68rem;
-  letter-spacing: 1.2px;
-  color: var(--ice-cyan);
-  margin-bottom: 3px;
-}
-
-.trivia-content {
-  font-size: 0.8rem;
-  line-height: 1.4;
-  color: var(--text-main);
 }
 
 .endgame-actions {
