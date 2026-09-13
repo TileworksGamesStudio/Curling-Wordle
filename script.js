@@ -1,10 +1,11 @@
 (function () {
   "use strict";
 
-  // Configuration & Links
+  // Configuration & Tournament Constants
   const HOME_PAGE_URL = "https://tileworksgamesstudio.github.io/Curling-Menu/"; 
   const STORAGE_KEY = "word_guess_data_v1";
   const CSV_FILE = "puzzles.csv";
+  const RELEASE_TIMEZONE = "America/Toronto"; // Authoritative Canadian Tournament Timezone
 
   // Built-in fallback puzzle dataset for offline & resilient operation
   const FALLBACK_PUZZLES = [
@@ -70,7 +71,7 @@
   ]);
 
   // ==========================================================================
-  // LIGHTWEIGHT SOUND SYSTEM (Web Audio Synthesizer, Safe & Gesture-Initiated)
+  // LIGHTWEIGHT SOUND SYSTEM (Web Audio Synthesizer)
   // ==========================================================================
   class CurlingAudioEngine {
     constructor() {
@@ -95,7 +96,6 @@
       }
     }
 
-    // Gentle tactile click for key taps
     playKeyTap() {
       if (!this.ctx) return;
       try {
@@ -119,7 +119,6 @@
       } catch (e) {}
     }
 
-    // Tactile button press (solid stone tap)
     playButtonTap() {
       if (!this.ctx) return;
       try {
@@ -143,7 +142,6 @@
       } catch (e) {}
     }
 
-    // Subdued error thud
     playError() {
       if (!this.ctx) return;
       try {
@@ -167,12 +165,11 @@
       } catch (e) {}
     }
 
-    // Elegant championship completion chime
     playSuccess() {
       if (!this.ctx) return;
       try {
         this.resume();
-        const notes = [523.25, 659.25, 783.99]; // C5, E5, G5
+        const notes = [523.25, 659.25, 783.99];
         notes.forEach((freq, idx) => {
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
@@ -195,36 +192,23 @@
   }
 
   // ==========================================================================
-  // EXACTLY 12 CURLING ICONS + AUTHORITATIVE MAPLE LEAF SVG DEFINITIONS
+  // CURLING ICONS & CANADIAN MAPLE LEAF SVG DEFINITIONS
   // ==========================================================================
   const CURLING_ICONS = [
-    // 1. Curling Stone
     `<svg viewBox="0 0 100 100"><ellipse cx="50" cy="58" rx="42" ry="24" fill="#132B4A" opacity="0.85"/><ellipse cx="50" cy="56" rx="40" ry="22" fill="#DCEFFC"/><ellipse cx="50" cy="50" rx="34" ry="16" fill="#D71920"/><path d="M42 42 C 42 26, 58 26, 58 42" stroke="#0A192F" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`,
-    // 2. Curling House / Rings
     `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#132B4A" stroke-width="4"/><circle cx="50" cy="50" r="32" fill="#DCEFFC" stroke="#132B4A" stroke-width="3"/><circle cx="50" cy="50" r="16" fill="#D71920" stroke="#0A192F" stroke-width="2"/><circle cx="50" cy="50" r="5" fill="#FFFFFF"/></svg>`,
-    // 3. Curling Broom
     `<svg viewBox="0 0 100 100"><line x1="22" y1="84" x2="78" y2="16" stroke="#0A192F" stroke-width="4" stroke-linecap="round"/><rect x="14" y="76" width="22" height="10" rx="3" transform="rotate(-40 25 81)" fill="#D71920" stroke="#0A192F" stroke-width="2"/></svg>`,
-    // 4. Brush Head
     `<svg viewBox="0 0 100 100"><rect x="18" y="38" width="64" height="24" rx="6" fill="#FFC400" stroke="#0A192F" stroke-width="3"/><line x1="24" y1="50" x2="76" y2="50" stroke="#0A192F" stroke-width="2" stroke-dasharray="4 2"/><circle cx="50" cy="38" r="4" fill="#0A192F"/></svg>`,
-    // 5. Hack (Foot Hold)
     `<svg viewBox="0 0 100 100"><rect x="25" y="30" width="50" height="40" rx="4" fill="#132B4A"/><line x1="32" y1="40" x2="68" y2="40" stroke="#DCEFFC" stroke-width="3"/><line x1="32" y1="50" x2="68" y2="50" stroke="#DCEFFC" stroke-width="3"/><line x1="32" y1="60" x2="68" y2="60" stroke="#DCEFFC" stroke-width="3"/></svg>`,
-    // 6. Stone Handle
     `<svg viewBox="0 0 100 100"><path d="M25 65 L25 45 C25 30, 75 30, 75 45 L75 65" fill="none" stroke="#FFC400" stroke-width="8" stroke-linecap="round"/><circle cx="25" cy="65" r="5" fill="#0A192F"/><circle cx="75" cy="65" r="5" fill="#0A192F"/></svg>`,
-    // 7. Hog Line
     `<svg viewBox="0 0 100 100"><rect x="5" y="44" width="90" height="12" fill="#D71920" rx="2"/><line x1="5" y1="50" x2="95" y2="50" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="6 4"/></svg>`,
-    // 8. Back Line
     `<svg viewBox="0 0 100 100"><line x1="10" y1="50" x2="90" y2="50" stroke="#132B4A" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="50" r="10" fill="none" stroke="#132B4A" stroke-width="3"/></svg>`,
-    // 9. Centre Line
     `<svg viewBox="0 0 100 100"><line x1="50" y1="5" x2="50" y2="95" stroke="#132B4A" stroke-width="4"/><line x1="35" y1="50" x2="65" y2="50" stroke="#132B4A" stroke-width="4"/></svg>`,
-    // 10. Pebble / Ice Texture Motif
     `<svg viewBox="0 0 100 100"><circle cx="30" cy="25" r="4" fill="#B7D9EE"/><circle cx="65" cy="35" r="3" fill="#B7D9EE"/><circle cx="45" cy="60" r="5" fill="#B7D9EE"/><circle cx="75" cy="70" r="4" fill="#B7D9EE"/><circle cx="25" cy="75" r="3" fill="#B7D9EE"/></svg>`,
-    // 11. Scoreboard / End Marker
     `<svg viewBox="0 0 100 100"><rect x="15" y="20" width="70" height="60" rx="4" fill="#FFFFFF" stroke="#0A192F" stroke-width="3"/><line x1="15" y1="45" x2="85" y2="45" stroke="#0A192F" stroke-width="2"/><text x="50" y="38" font-size="14" font-weight="900" text-anchor="middle" fill="#D71920" font-family="sans-serif">END</text><text x="50" y="70" font-size="18" font-weight="900" text-anchor="middle" fill="#0A192F" font-family="sans-serif">8</text></svg>`,
-    // 12. Skip / Throwing Position Silhouette
     `<svg viewBox="0 0 100 100"><circle cx="60" cy="25" r="8" fill="#0A192F"/><path d="M52 35 L40 50 L20 52 M40 50 L58 60 L78 72" stroke="#0A192F" stroke-width="5" stroke-linecap="round" fill="none"/><ellipse cx="18" cy="60" rx="10" ry="5" fill="#D71920"/></svg>`
   ];
 
-  // Mandatory Canadian Maple Leaf SVG Geometry (Section 65.6)
   function createMapleLeafSvg(color) {
     const fill = color || "#D71920";
     return `<svg viewBox="0 0 298.72 341.12" aria-hidden="true" focusable="false">
@@ -238,7 +222,7 @@
   }
 
   // ==========================================================================
-  // STORAGE & HELPERS
+  // STORAGE & TIME HELPERS (AUTHORITATIVE SERVER INSTANT + TIMEZONE)
   // ==========================================================================
   function loadState() {
     try {
@@ -319,12 +303,15 @@
     });
   }
 
-  function getTodayString() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
+  // Format an instant to ISO YYYY-MM-DD in the release timezone
+  function formatInstantToDateString(dateObj, timezone) {
+    const formatter = new Intl.DateTimeFormat("en-CA", {
+      timeZone: timezone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    });
+    return formatter.format(dateObj); // Output is YYYY-MM-DD
   }
 
   // ==========================================================================
@@ -335,7 +322,7 @@
       this.state = loadState();
       this.puzzles = [];
       this.currentPuzzle = null;
-      this.todayString = getTodayString();
+      this.authoritativeToday = null; // Determined authoritatively
       this.activeInput = "";
       this.guesses = [];
       this.isComplete = false;
@@ -348,7 +335,7 @@
       this.initKeyboard();
       this.attachEvents();
       this.initAmbientCurlingLayer();
-      this.loadPuzzleData();
+      this.initLifecycle();
     }
 
     cacheElements() {
@@ -413,9 +400,64 @@
       }
     }
 
-    // ========================================================================
-    // AMBIENT CURLING BACKGROUND (12 Icons + Maple Leaf across 3 Depth Levels)
-    // ========================================================================
+    async initLifecycle() {
+      await this.resolveAuthoritativeDate();
+      await this.loadPuzzleData();
+      this.pruneUnreleasedState();
+      this.updateMenuSummary();
+    }
+
+    // Determine current instant via origin HTTP Date header; fail-closed on tampered clock
+    async resolveAuthoritativeDate() {
+      let serverInstant = null;
+      try {
+        const response = await fetch(`${window.location.href.split("?")[0]}?t=${Date.now()}`, {
+          method: "HEAD",
+          cache: "no-store"
+        });
+        const dateHeader = response.headers.get("date");
+        if (dateHeader) {
+          const parsed = new Date(dateHeader);
+          if (!isNaN(parsed.getTime())) {
+            serverInstant = parsed;
+          }
+        }
+      } catch (e) {
+        // Fallback network failure handled below
+      }
+
+      // If server response unavailable (e.g. offline file://), compare device time against stored progress
+      if (!serverInstant) {
+        const localNow = new Date();
+        // Disallow device clock if it is earlier than the highest recorded completed puzzle
+        const recordedDates = Object.keys(this.state.puzzles).sort();
+        const maxRecorded = recordedDates.length > 0 ? recordedDates[recordedDates.length - 1] : null;
+        const localFormatted = formatInstantToDateString(localNow, RELEASE_TIMEZONE);
+        
+        if (maxRecorded && localFormatted < maxRecorded) {
+          // Clock was set backwards: clamp to highest authenticated date
+          this.authoritativeToday = maxRecorded;
+        } else {
+          this.authoritativeToday = localFormatted;
+        }
+      } else {
+        this.authoritativeToday = formatInstantToDateString(serverInstant, RELEASE_TIMEZONE);
+      }
+    }
+
+    // Remove any invalid storage items belonging to future dates
+    pruneUnreleasedState() {
+      if (!this.authoritativeToday || !this.state.puzzles) return;
+      let changed = false;
+      Object.keys(this.state.puzzles).forEach((dateKey) => {
+        if (dateKey > this.authoritativeToday) {
+          delete this.state.puzzles[dateKey];
+          changed = true;
+        }
+      });
+      if (changed) saveState(this.state);
+    }
+
     initAmbientCurlingLayer() {
       if (!this.dom.ambientLayer) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -429,7 +471,6 @@
         const floater = document.createElement("div");
         floater.className = "ambient-floater";
 
-        // Decide between 12 curling icons and Canadian maple leaf
         const isLeaf = Math.random() < 0.35;
         let svgMarkup = "";
 
@@ -444,7 +485,6 @@
 
         floater.innerHTML = svgMarkup;
 
-        // Depth assignments
         const depths = ["depth-distant", "depth-middle", "depth-near"];
         const depthChoice = depths[Math.floor(Math.random() * depths.length)];
         floater.classList.add(depthChoice);
@@ -467,8 +507,8 @@
           opacity = 0.28;
         }
 
-        const startX = Math.random() * 92 + 4; // %
-        const driftX = (Math.random() - 0.5) * 60; // px
+        const startX = Math.random() * 92 + 4;
+        const driftX = (Math.random() - 0.5) * 60;
         const rotationStart = (Math.random() - 0.5) * 40;
         const rotationEnd = rotationStart + (Math.random() - 0.5) * 90;
 
@@ -481,7 +521,6 @@
         this.dom.ambientLayer.appendChild(floater);
         activeFloaters++;
 
-        // Smooth CSS Web Animations API
         const animation = floater.animate(
           [
             { transform: `translate(0, 0) rotate(${rotationStart}deg)`, opacity: 0 },
@@ -501,7 +540,6 @@
         };
       };
 
-      // Seed initial floaters
       for (let i = 0; i < 4; i++) {
         setTimeout(spawnFloater, i * 1800);
       }
@@ -546,25 +584,44 @@
       }
 
       this.puzzles.forEach((p) => VALID_WORDS.add(p.word));
-      this.updateMenuSummary();
     }
 
+    // Strictly returns today's puzzle or the latest RELEASED puzzle. Never returns a future puzzle.
     getDailyPuzzle() {
-      const todayMatch = this.puzzles.find((p) => p.date === this.todayString);
-      if (todayMatch) return todayMatch;
+      if (!this.puzzles.length || !this.authoritativeToday) return null;
 
-      const past = this.puzzles
-        .filter((p) => p.date <= this.todayString)
+      const exactMatch = this.puzzles.find((p) => p.date === this.authoritativeToday);
+      if (exactMatch) return exactMatch;
+
+      // Find the latest puzzle that has actually been released
+      const releasedPast = this.puzzles
+        .filter((p) => p.date <= this.authoritativeToday)
         .sort((a, b) => b.date.localeCompare(a.date));
 
-      if (past.length > 0) return past[0];
-      return this.puzzles[0];
+      if (releasedPast.length > 0) {
+        return releasedPast[0];
+      }
+
+      // If all scheduled puzzles are in the future, return null (fail closed)
+      return null;
+    }
+
+    getReleasedPuzzles() {
+      if (!this.authoritativeToday) return [];
+      return this.puzzles.filter((p) => p.date <= this.authoritativeToday);
     }
 
     updateMenuSummary() {
       const daily = this.getDailyPuzzle();
-      if (!daily) return;
 
+      if (!daily) {
+        this.dom.menuDailyStatus.textContent = "Season opening soon";
+        this.dom.navDaily.classList.add("disabled");
+        this.dom.menuVaultCount.textContent = "No matches open";
+        return;
+      }
+
+      this.dom.navDaily.classList.remove("disabled");
       const record = this.state.puzzles[daily.date];
       if (record && record.completed) {
         this.dom.menuDailyStatus.textContent = record.won
@@ -576,7 +633,7 @@
         this.dom.menuDailyStatus.textContent = "Ready to throw";
       }
 
-      const availableVaultPuzzles = this.puzzles.filter((p) => p.date !== daily.date);
+      const availableVaultPuzzles = this.getReleasedPuzzles().filter((p) => p.date !== daily.date);
       this.dom.menuVaultCount.textContent = `${availableVaultPuzzles.length} matches available`;
     }
 
@@ -631,7 +688,6 @@
     }
 
     attachEvents() {
-      // Audio engine unlocked on first page click
       window.addEventListener(
         "pointerdown",
         () => {
@@ -640,7 +696,6 @@
         { once: true }
       );
 
-      // Hardware Keyboard Input
       window.addEventListener("keydown", (e) => {
         if (e.ctrlKey || e.metaKey || e.altKey) return;
         const activeDialog = document.querySelector("dialog[open]");
@@ -658,43 +713,39 @@
         }
       });
 
-      // Navigation: Menu -> Daily Puzzle
       this.dom.navDaily.addEventListener("click", () => {
         const daily = this.getDailyPuzzle();
-        if (daily) this.startPuzzle(daily, true);
+        if (daily) {
+          this.startPuzzle(daily, true);
+        } else {
+          this.showToast("Today's end has not yet arrived on ice.");
+        }
       });
 
-      // Navigation: Menu -> Vault
       this.dom.navVault.addEventListener("click", () => {
         this.switchView("vault");
       });
 
-      // Navigation: Vault Back -> Menu
       this.dom.btnVaultBack.addEventListener("click", () => {
         this.switchView("menu");
       });
 
-      // Navigation: Game Back -> Menu
       this.dom.btnGameBack.addEventListener("click", () => {
         this.switchView("menu");
       });
 
-      // Menu Rules & Stats
       this.dom.btnMenuRules.addEventListener("click", () => this.openDialog(this.dom.modalRules));
       this.dom.btnMenuStats.addEventListener("click", () => this.renderStatsModal());
 
-      // In-Game Rules & Stats
       this.dom.btnGameRules.addEventListener("click", () => this.openDialog(this.dom.modalRules));
       this.dom.btnGameStats.addEventListener("click", () => this.renderStatsModal());
 
-      // Result Modal Actions
       this.dom.btnShare.addEventListener("click", () => this.shareResult());
       this.dom.btnResultVault.addEventListener("click", () => {
         this.dom.modalResult.close();
         this.switchView("vault");
       });
 
-      // Dialog Close Buttons
       document.querySelectorAll("[data-close]").forEach((btn) => {
         btn.addEventListener("click", () => {
           this.audio.playButtonTap();
@@ -707,6 +758,12 @@
     }
 
     startPuzzle(puzzle, isDaily) {
+      // SECURITY GATE: Prevent launching any unreleased puzzle
+      if (!puzzle || !puzzle.date || puzzle.date > this.authoritativeToday) {
+        this.showToast("This match end is scheduled for a future draw.");
+        return;
+      }
+
       this.audio.playButtonTap();
       this.currentPuzzle = puzzle;
       this.activeInput = "";
@@ -888,6 +945,8 @@
     }
 
     saveCurrentProgress(completed, won) {
+      if (!this.currentPuzzle || this.currentPuzzle.date > this.authoritativeToday) return;
+
       this.state.puzzles[this.currentPuzzle.date] = {
         guesses: this.guesses,
         completed,
@@ -927,14 +986,15 @@
       this.dom.vaultList.innerHTML = "";
 
       const daily = this.getDailyPuzzle();
-      const archiveItems = this.puzzles
+      // RELEASE RULE: Only puzzles whose release date is strictly past or today are available
+      const archiveItems = this.getReleasedPuzzles()
         .filter((p) => !daily || p.date !== daily.date)
         .sort((a, b) => b.date.localeCompare(a.date));
 
       if (archiveItems.length === 0) {
         const emptyMsg = document.createElement("p");
         emptyMsg.className = "vault-caption";
-        emptyMsg.textContent = "No archived matches available.";
+        emptyMsg.textContent = "No archived matches available yet.";
         this.dom.vaultList.appendChild(emptyMsg);
         return;
       }
